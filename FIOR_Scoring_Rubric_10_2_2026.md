@@ -317,7 +317,7 @@ Dimension status (proposed): Strong at 70% or more of the dimension maximum, Mod
 
 Missing data in totals: average only the criteria that were scored within each dimension. This gives a provisional total. Whether that total can be released is decided by the Review rule below.
 
-Tier is a recommendation. An account with no review trigger (Review Status `Acceptable`) can be released without individual approval, subject to the sampled check in the Quality Control Checklist. An account with any review trigger needs consultant approval before release and is labeled provisional until then.
+Tier is a recommendation. An account with no review trigger (Review Status `Acceptable`) does not need an individual review. The consultant still approves its tier as part of signing off the portfolio, after the sampled check in the Quality Control Checklist. An account with any review trigger needs consultant approval before release and is labeled provisional until then.
 
 ## When an account goes to a consultant (single review rule, Iteration 7 proposed)
 
