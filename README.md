@@ -15,23 +15,24 @@ A new TargetOrate consultant should execute the toolkit in this order:
 2. Read `workflow/TargetPath_Workflow_Instructions.md`.
 3. Run `prompts/01_Input_Validation_Prompt.md`.
 4. If the input gate permits scoring, run `prompts/02_FIOR_Scoring_Prompt.md` with `MASTER_PROMPT.md` and the scoring artifacts.
-5. Route exceptions through `prompts/04_Exception_Handling_Prompt.md`.
-6. Route mandatory-review cases through `prompts/03_Consultant_Review_Prompt.md` and `workflow/Human_Approval_Instructions.md`.
-7. Complete `workflow/Quality_Control_Checklist.md`.
-8. Publish results using the output templates.
-9. When testing a workflow change, use `prompts/05_Validation_Adjudication_Prompt.md`; never expose validation assets before the blind run is locked.
+5. Run `prompts/06_Criterion_Self_Review_Prompt.md` so the AI rechecks every criterion for every account before a human sees the results.
+6. Route exceptions through `prompts/04_Exception_Handling_Prompt.md`.
+7. Route mandatory-review cases through `prompts/03_Consultant_Review_Prompt.md` and `workflow/Human_Approval_Instructions.md`. At the human input checkpoint (`prompts/07_Human_Input_Correction_Prompt.md`), submit corrections, supplied data, and overrides using `templates/Human_Review_Input_Template.csv`.
+8. Complete `workflow/Quality_Control_Checklist.md`.
+9. Publish results using the output templates.
+10. When testing a workflow change, use `prompts/05_Validation_Adjudication_Prompt.md`; never expose validation assets before the blind run is locked.
 
 ## 11-Component Toolkit Map
 
 | TargetOrate requirement | MVP artifact |
 |---|---|
 | Modular prompts | `prompts/01_Input_Validation_Prompt.md`, `prompts/02_FIOR_Scoring_Prompt.md` |
-| Review prompts | `prompts/03_Consultant_Review_Prompt.md` |
+| Review prompts | `prompts/03_Consultant_Review_Prompt.md`; `prompts/06_Criterion_Self_Review_Prompt.md` |
 | Multi-step prompt chains | `MASTER_PROMPT.md`; `workflow/TargetPath_Workflow_Instructions.md` |
 | Quality-control checklists | `workflow/Quality_Control_Checklist.md` |
 | Workflow instructions | `workflow/TargetPath_Workflow_Instructions.md` |
-| Human approval instructions | `workflow/Human_Approval_Instructions.md` |
-| Input templates | `templates/Client_ICP_Input_Template.md`; `templates/Account_Data_Input_Template.csv` |
+| Human approval instructions | `workflow/Human_Approval_Instructions.md`; `prompts/07_Human_Input_Correction_Prompt.md` |
+| Input templates | `templates/Client_ICP_Input_Template.md`; `templates/Account_Data_Input_Template.csv`; `templates/Human_Review_Input_Template.csv` |
 | Exception-handling prompts | `prompts/04_Exception_Handling_Prompt.md` |
 | Output templates | `templates/ABM_Portfolio_Output_Template.csv`; `templates/Account_Summary_Card_Template.md` |
 | Test scenarios & expected results | `data/20_Company_Dataset_Week6_Validation.csv`; `validation/Expected_FIOR_Results_VALIDATION_ONLY.csv` |
@@ -56,7 +57,7 @@ A blank or Unknown value is not automatically negative evidence. Structured V2 f
 
 ## Human-in-the-Loop Control
 
-The AI produces recommendations, evidence trails, confidence, data-gap flags, and review triggers. It does not self-approve mandatory-review cases. Consultants use the review and human-approval artifacts to approve, override with evidence, request data, or escalate methodology ambiguity.
+The AI produces recommendations, evidence trails, confidence, data-gap flags, and review triggers. It does not self-approve mandatory-review cases. Before any human sees the results, the AI rechecks every criterion for every account (self review). Consultants then use the review and human-approval artifacts, including the human input checkpoint, to approve, correct data, supply missing data, override with evidence, request data, or escalate methodology ambiguity. Every correction flows back through rescoring and recomputed totals and tiers.
 
 ## Validation Boundary
 
@@ -70,6 +71,8 @@ The synthetic 20-company validation set uses versioned validation keys so histor
 - `validation/Adjudication_Log.md` documents why the historical and working keys differ.
 
 Do not compare a new run to one key while reporting metrics from the other.
+
+The Iteration 6 baseline below predates the self review step. Runs that include `prompts/06_Criterion_Self_Review_Prompt.md` must label their metrics with the workflow version and report self review corrections separately from first pass results.
 
 Iteration 6 baseline:
 - Raw criterion agreement: **255/280 (91.1%)**

@@ -15,8 +15,13 @@ Use before releasing a scored ABM portfolio.
 - [ ] Stale evidence thresholds were applied.
 - [ ] Dimension weights and total rounding were calculated correctly.
 - [ ] Tier cutoffs were applied to the rounded total.
+- [ ] Self review covered all 14 criteria for every account (criteria rechecked equals 14 times accounts).
+- [ ] Every self review mismatch was corrected with a rubric citation or escalated; no score was changed to reach a tier.
 - [ ] All mandatory review triggers were surfaced.
 - [ ] Human overrides include evidence and rationale.
+- [ ] Human supplied or corrected data carries a source and date and is marked in the audit trail.
+- [ ] Original AI results are kept beside every human change, and totals, tiers, and triggers were recomputed.
+- [ ] Accounts still waiting on human input are labeled provisional.
 - [ ] Strategic outliers were reviewed rather than score-manipulated.
 - [ ] Final portfolio output contains data-gap and review status.
 - [ ] Validation comparison, when performed, occurred only after a blind run.
