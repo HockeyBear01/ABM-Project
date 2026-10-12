@@ -54,3 +54,13 @@ Ask the first five first.
 | 11 | How old can satisfaction or dissatisfaction evidence be before we ignore it? | Not yet defined; no staleness rule exists for this field |
 | 12 | If an account's narrative says "dissatisfied" but the structured satisfaction field is `Unknown`, do you agree the structured field wins? | A6 |
 | 13 | Could someone at TargetOrate who did not write these rules check five or six gate cases so we have an independent key? | A16 |
+
+## Other open questions for TargetOrate (review rule and scoring)
+
+| # | Question | Why it matters |
+|---|---|---|
+| 14 | Do you agree with one review rule for missing data: hold the account only if Company Name, Industry or Target ACV is missing, and otherwise review only when setting the missing criteria to 2 versus 10 changes the tier? | Replaces three conflicting rules |
+| 15 | Is a ceiling of 25 percent of accounts per run reviewed (about 6 hours for 25 accounts at 15 minutes each) realistic for your consultants? What is the real figure? | The ceiling is a Team Gamma estimate |
+| 16 | When a run exceeds the ceiling, is it acceptable to release the accounts not reviewed as provisional? | Overflow handling |
+| 17 | Should totals ending exactly in .5 round up? | New tie rule |
+| 18 | Can production data carry two trigger types per account so C6 can reach 10? | C6 band 10 was unreachable with one trigger |

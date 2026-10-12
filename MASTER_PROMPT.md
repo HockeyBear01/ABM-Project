@@ -74,11 +74,11 @@ The **FIOR rubric's missing-data rule is authoritative**:
 - Never substitute an assumed value solely because an evidence category has a high rank in the Criteria Ranking Model.
 - When both a V2 structured field and a legacy narrative field describe the same concept, use the structured V2 evidence. Legacy narrative fields are Rank 20 context/backward-compatibility evidence and may not replace required dates, compliance status, technology categories, budget evidence, or other structured fields.
 
-Use the ranking model to determine **severity and review priority**, not to override the rubric:
+Use the ranking model to order the review queue, not to decide whether an account is reviewed. Whether missing data sends an account to a consultant follows one rule, stated in the rubric under "When an account goes to a consultant":
 
-- **Ranks 1–3:** Missing data is a Fatal Data Error; do not guess. Return `NS` and route to human review.
-- **Ranks 4–15:** Return `NS` for affected criteria when required evidence is missing and flag for consultant review.
-- **Ranks 16–20:** Return `NS` where required; calculate eligible dimension averages using only scored criteria as permitted by the rubric and append an audit note.
+- **Fatal (ranks 1 to 3: Company Name, Industry and Sub-Industry, Target ACV):** hold the account and request the data. Do not guess.
+- **Any other NS:** compute the total with every NS criterion at 2 and again at 10. If the tier is the same, do not send to review; add an audit note naming the missing fields. If the tier differs, send to the consultant and name the fields that would settle it.
+- **Volume:** report the share of accounts sent to review. The proposed ceiling is 25 percent. If exceeded, review in the order set in the rubric and release the rest as provisional.
 
 Apply rubric confidence levels (High / Medium / Low) and all mandatory review triggers.
 
@@ -191,7 +191,7 @@ Honor the rubric's incomplete-dimension rules. Do not present a deceptively comp
 - **Tier 3 (40–59):** 1:Many ABM
 - **Under 40 / Disqualified:** Nurture / Inbound Only
 
-Apply every review trigger defined in the FIOR rubric, including missing-data tolerance, Low confidence, stale/unverified roles, leadership triggers, inferred values, near-cutoff totals, fit failures, and unhappy churn.
+Apply every review trigger defined in the FIOR rubric, including the missing data bounds test, Low confidence, stale/unverified roles, leadership triggers, inferred values, near-cutoff totals, fit failures, and unhappy churn.
 
 ## Step 5A: Competitive Lock Gate
 
