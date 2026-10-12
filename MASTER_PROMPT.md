@@ -180,7 +180,7 @@ Apply the fixed weights:
 - **OPPORTUNITY (C9–C12):** Dimension Average × 3.0 (/30)
 - **RELATIONSHIP (C13–C14):** Dimension Average × 1.0 (/10)
 
-Sum the four weighted dimensions to a /100 composite and round to the nearest whole number before tier assignment.
+Sum the four weighted dimensions to a /100 composite and round to the nearest whole number before tier assignment. A total ending exactly in .5 rounds up.
 
 Honor the rubric's incomplete-dimension rules. Do not present a deceptively complete score when missing evidence requires review.
 

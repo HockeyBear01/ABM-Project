@@ -20,7 +20,7 @@ Rules:
    - **e. Caps and flags.** C7 inferred timeline cap; C13 role verification cap; stale data thresholds; leadership change flag; confidence level consistent with the evidence.
    - **f. Source hierarchy.** ICP benchmark cited for C1 to C4. Reference lists used only where the ICP does not own the parameter.
    - **g. Forbidden evidence.** Nothing under `/validation/` and no Ground Truth field influenced any score.
-   - **h. Math.** Dimension averages use scored criteria only, correct multipliers, correct sum, rounding to the nearest whole number, correct tier cutoff, and every review trigger evaluated (including within 2 points of a cutoff).
+   - **h. Math.** Dimension averages use scored criteria only, correct multipliers, correct sum, rounding to the nearest whole number with exact .5 rounding up, correct tier cutoff, the low and high bound tiers computed for every account with an NS (review only when they differ, held only when a fatal field is missing), and every review trigger evaluated (including within 2 points of a cutoff).
    - **i. Competitive Lock Gate.** Applied only to `Locked` contracts; band computed from the Scoring As Of Date using under 12, 12 to 24 inclusive, and over 24 or no date; satisfaction move taken from the structured field only; cap never raised a tier; both the score implied tier and the post gate tier reported.
 4. Resolve each disagreement between the re derivation and the first pass:
    - If the rubric text and the cited evidence support the re derived score, correct the score, record both scores, and recompute that account's dimension scores, total, tier, and review status.
