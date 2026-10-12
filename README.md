@@ -73,6 +73,8 @@ The synthetic 20-company validation set uses versioned validation keys so histor
 
 Do not compare a new run to one key while reporting metrics from the other.
 
+After each run, complete `validation/Failure_Analysis_Template.md`. For consistency across runs, follow `validation/Repeatability_Protocol.md`. The ground truth column for the Iteration 7 dataset is held in `validation/20_Company_Dataset_Iteration7_Ground_Truth.csv`, not in the scoring file.
+
 The Iteration 6 baseline below predates the self review step. Runs that include `prompts/06_Criterion_Self_Review_Prompt.md` must label their metrics with the workflow version and report self review corrections separately from first pass results.
 
 Iteration 6 baseline:
@@ -113,4 +115,4 @@ The toolkit qualifies as minimum viable when a new consultant can, using this RE
 
 The cold-start MVP acceptance test is documented in `validation/MVP_v1_Acceptance_Test.md`. All 13 functional acceptance conditions passed; two minor documentation/version-control issues identified by the test are corrected in the MVP v1.0 cleanup.
 
-**MVP v1.0 status: Accepted.** Future scoring-rule changes should be treated as post-MVP enhancements and tested as separate iterations.
+**MVP v1.0 status: Accepted (Iteration 6 toolkit; the Iteration 7 additions have not been re-tested cold).** Future scoring-rule changes should be treated as post-MVP enhancements and tested as separate iterations.

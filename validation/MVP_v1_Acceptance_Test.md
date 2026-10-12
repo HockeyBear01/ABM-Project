@@ -1,5 +1,7 @@
 # MVP v1.0 Acceptance Test
 
+> Iteration 7 note: this test was run on the Iteration 6 toolkit, before the self review step, human input checkpoint, Competitive Lock Gate and single review rule. Those changes have not been through a cold start test. Rerun it after the 100 company dataset is in place.
+
 **Status:** PASS WITH MINOR CORRECTIONS  
 **Test basis:** Default `main` branch after Iterations 1-6 and toolkit packaging were merged.  
 **Test method:** Cold-start operator examination using the README and packaged toolkit artifacts, with `/validation/` quarantined until the operational workflow was examined.

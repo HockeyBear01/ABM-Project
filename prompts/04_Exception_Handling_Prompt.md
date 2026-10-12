@@ -7,7 +7,7 @@ Handle scoring exceptions without silently inventing evidence or bypassing human
 Classify each exception using the TargetPath source hierarchy and Data Requirements Matrix.
 
 Exception classes:
-- MISSING EVIDENCE: required field blank/Unknown/unverified -> NS where required.
+- MISSING EVIDENCE: required field blank/Unknown/unverified -> NS where required. If the field is Company Name, Industry or Sub-Industry, or Target ACV, hold the account and request the data. Otherwise compute the low (NS=2) and high (NS=10) bound totals; review only if the two tiers differ, else add an audit note.
 - EXPLICIT NEGATIVE: verified absence -> use the applicable numeric rubric band.
 - CONTRADICTION: structured sources conflict -> use source hierarchy and flag review.
 - STALE EVIDENCE: score only as the rubric permits and flag when thresholds are exceeded.
