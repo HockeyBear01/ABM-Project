@@ -22,7 +22,7 @@ Score one account on the 14 FIOR criteria using only the evidence in the account
 2. Work from the top band down and take the first band whose condition is fully met. A combination not listed takes the lower adjacent score.
 3. Score only from the account record and the inputs above. Do not use outside knowledge to fill a gap.
 4. Cite the field name and value behind every score.
-5. Missing data: if the field a criterion needs is blank or marked unknown, return NS (not scored) and flag for review. A blank is not a zero. Score 2 only when the record shows the signal is absent. This rule is interim until TargetOrate supplies its tiered list of criterion importance and a fallback for missing information.
+5. Missing data: if the field a criterion needs is blank or marked unknown, return NS (not scored). A blank is not a zero. Score 2 only when the record shows the signal is absent. Whether an NS sends the account to a consultant is decided only by the Review rule ("When an account goes to a consultant") below.
 6. Stale data (proposed thresholds): intent signals older than 90 days count as absent. Company data older than 12 months, and contact or role data older than 6 months, are scored but flagged.
 7. Confidence: High when the record states the fact directly, Medium when it is inferred, Low when the evidence is thin. Low confidence triggers review.
 8. For each criterion return: criterion number, score (or NS), band, evidence cited (field and value), confidence, review flag (yes or no) and reason.
@@ -148,6 +148,7 @@ Evidence: funding, leadership change, technology migration, contract renewal, pr
 Rules:
 - An explicit negative value such as `Verified no trigger`, `No trigger identified`, or an equivalent structured statement is affirmative evidence that no buying trigger was found and scores C6 = 2 when no positive structured trigger is present.
 - Do not treat the date attached to an explicit negative trigger record as evidence that a trigger occurred. The date establishes when the absence was verified.
+- Score 10 needs two distinct trigger types. Trigger Type and Trigger Date may each hold up to two entries separated by a semicolon, matched in order. With a single entry, 8 is the highest score available.
 - A blank Trigger Type is missing evidence and follows the global NS rule; it is not equivalent to `Verified no trigger`.
 - When structured Trigger Type / Trigger Date evidence is present, legacy narrative trigger fields may not override it.
 
@@ -303,7 +304,7 @@ Average the scored criteria in each dimension, then multiply by the dimension mu
 | OPPORTUNITY | 9 to 12 | 3.0 | 30 |
 | RELATIONSHIP | 13 to 14 | 1.0 | 10 |
 
-Total = FIT + INTENT + OPPORTUNITY + RELATIONSHIP, out of 100. Round the total to the nearest whole number before assigning a tier.
+Total = FIT + INTENT + OPPORTUNITY + RELATIONSHIP, out of 100. Round the total to the nearest whole number before assigning a tier. A total that ends exactly in .5 rounds up (74.5 becomes 75). Compute from unrounded dimension scores. (Iteration 7 tie rule; the Iteration 6 keys rounded some ties down, see the README.)
 
 | Total | Recommended tier | Approach |
 | --- | --- | --- |
@@ -314,9 +315,26 @@ Total = FIT + INTENT + OPPORTUNITY + RELATIONSHIP, out of 100. Round the total t
 
 Dimension status (proposed): Strong at 70% or more of the dimension maximum, Moderate at 40% to 69%, Weak below 40%.
 
-Missing data in totals (proposed): average only the criteria that were scored. If more than one criterion in a dimension is NS, or any criterion in RELATIONSHIP is NS, mark the dimension incomplete and route the account to review before a total is accepted.
+Missing data in totals: average only the criteria that were scored within each dimension. This gives a provisional total. Whether that total can be released is decided by the Review rule below.
 
-Tier is a recommendation only. The AI outputs a recommended tier and the consultant approves it.
+Tier is a recommendation. An account with no review trigger (Review Status `Acceptable`) can be released without individual approval, subject to the sampled check in the Quality Control Checklist. An account with any review trigger needs consultant approval before release and is labeled provisional until then.
+
+## When an account goes to a consultant (single review rule, Iteration 7 proposed)
+
+This one rule replaces three earlier rules that disagreed: the global missing data rule, the "more than one NS per dimension" tolerance, and the rank based routing in `MASTER_PROMPT.md`. Nothing else decides whether a missing value causes review.
+
+**Rule for missing data (NS).**
+1. Cannot score at all (fatal). If Company Name, Industry or Sub-Industry (C1), or Target ACV (C9) is missing, the account is held and a data request goes to the consultant. These are the Criteria Ranking Model ranks 1 to 3. Without them the tier cannot be defended and no bound can be computed.
+2. Any other NS: compute the total twice, once with every NS criterion set to 2 (low bound) and once set to 10 (high bound), using the same dimension formula and rounding. If both totals give the same tier, the missing data cannot change the recommendation. The account is not reviewed for the NS; the output carries an audit note listing the missing fields. If the two totals give different tiers, the account goes to the consultant, with the specific fields that would settle it listed.
+3. Evidence rank only orders the queue (see rule 5 below). It never decides, by itself, whether an account is reviewed.
+
+**Why this rule.** A consultant's time is worth spending only where the missing value could change what the client does. A tier that stays the same at the worst case and the best case needs no human to fill the gap. A tier that changes needs one. This ties review to the decision rather than to the number of blanks.
+
+**Other triggers (unchanged).** Low confidence, conflicting industry classification, unverified role older than 6 months or a leadership change trigger, an inferred timeline or ACV or competitor status, a total within 2 points of a tier cutoff, scoring 2 on both Industry and Company Size, an unhappy churn, and the Competitive Lock Gate outcomes listed below.
+
+**Review volume ceiling (proposed).** Plan for no more than 25 percent of accounts in a run going to a consultant (for example 25 of 100). Reasoning: at roughly 15 minutes per account, 25 reviews is about 6 hours, which one consultant can complete in a working day, so a run can be turned around within a day; above that, review becomes the bottleneck and approvals become rushed. The figure is a Team Gamma proposal and needs TargetOrate's real consultant capacity.
+4. If more than 25 percent trigger, review in this order: fatal data holds first, then accounts whose bounds straddle Tier 1, then accounts near a cutoff, then the rest. Accounts not reached are released as provisional, never as approved.
+5. Report the review rate for every run. A rate above the ceiling is a finding about the data or the rules and should be reported, not hidden.
 
 ## Competitive Lock Gate (proposed, Iteration 7)
 
@@ -360,7 +378,7 @@ Tier is a recommendation only. The AI outputs a recommended tier and the consult
 
 Route a single account to a consultant when any of these is true:
 
-- Any criterion returns NS beyond the tolerance above
+- Missing data whose low and high bounds give different tiers, or a fatal missing field (see the Review rule above)
 - Any criterion is scored with Low confidence
 - Data provider category and company description disagree on industry
 - A contact's role is not verified in the last 6 months, or the trigger is a leadership change

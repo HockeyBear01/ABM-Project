@@ -11,7 +11,7 @@ The MVP contains all 11 requested toolkit components: modular prompts, review pr
 
 A new TargetOrate consultant should execute the toolkit in this order:
 
-1. Complete `templates/Client_ICP_Input_Template.md` and populate account data using `templates/Account_Data_Input_Template.csv`.
+1. Complete `templates/Client_ICP_Input_Template.md` and populate account data using `templates/Account_Data_Input_Template.csv`. If a dataset carries a ground truth column, run `tools/split_ground_truth.py` first and score only the `_scoring` copy.
 2. Read `workflow/TargetPath_Workflow_Instructions.md`.
 3. Run `prompts/01_Input_Validation_Prompt.md`.
 4. If the input gate permits scoring, run `prompts/02_FIOR_Scoring_Prompt.md` with `MASTER_PROMPT.md` and the scoring artifacts.
@@ -79,8 +79,12 @@ Iteration 6 baseline:
 - Raw criterion agreement: **255/280 (91.1%)**
 - Residual disagreements: **25**
 - Human adjudication: **18 validation-key errors, 3 model/execution errors, 4 unresolved rubric/data ambiguities**
-- Adjudicated agreement crediting confirmed key errors: **273/280 (97.5%)**
-- Accuracy on determinable cases excluding the four unresolved ambiguities: **273/276 (98.9%)**
+- Rule conformance after author adjudication, crediting confirmed key errors: **273/280 (97.5%)**
+- Rule conformance after author adjudication, excluding the four unresolved ambiguities: **273/276 (98.9%)**
+
+These two figures are not accuracy against an independent answer. Team Gamma wrote both the validation key and the corrections, so they measure how closely the output follows the rubric as the team understands it. The 91.1% raw figure is the cleaner measure of agreement with the original key. Provenance of the run (which AI, version, and date) and the committed run output are not in this repository and must be added by the team that ran it.
+
+Tie rule note: three Iteration 6 key totals end exactly in .5 (Apex 73.5, Summit 74.5, BlueMatrix 73.5) and the key rounded some of them down. Iteration 7 rounds .5 up. No tier changes. The Iteration 6 keys are left as they were.
 
 Raw and adjudicated metrics must be reported separately.
 

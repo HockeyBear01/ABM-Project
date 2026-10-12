@@ -44,7 +44,7 @@ Preserve human adjudication of residual disagreements after the frozen Iteration
 - 3 model/execution errors
 - 4 unresolved rubric/data ambiguities
 - Raw agreement remains 91.1%.
-- Crediting confirmed key errors gives 273/280 = 97.5% adjudicated agreement.
-- Excluding four genuinely ambiguous cases gives 273/276 = 98.9% adjudicated accuracy on determinable cases.
+- Crediting confirmed key errors gives 273/280 = 97.5% rule conformance after author adjudication (not an independent accuracy measure; the key and the corrections were written by the same team).
+- Excluding four genuinely ambiguous cases gives 273/276 = 98.9% rule conformance after author adjudication on determinable cases.
 
 Do not silently resolve the four ambiguities. Any future rule change belongs in a separately tested iteration.

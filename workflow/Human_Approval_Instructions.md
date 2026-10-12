@@ -4,7 +4,7 @@
 The AI recommends; an authorized TargetOrate consultant approves material scoring and portfolio decisions.
 
 ## Approval required
-Human approval is mandatory when the rubric or MASTER_PROMPT triggers review, including material NS conditions, Low confidence, stale/unverified roles, leadership triggers, inferred timeline/ACV/competitor facts, near tier cutoffs, fit failures, unhappy churn, contradictions, rubric ambiguity, strategic outliers, and unresolved self review discrepancies.
+Human approval is mandatory when the rubric or MASTER_PROMPT triggers review, including missing data whose low and high bounds give different tiers (rubric Review rule), Low confidence, stale/unverified roles, leadership triggers, inferred timeline/ACV/competitor facts, near tier cutoffs, fit failures, unhappy churn, contradictions, rubric ambiguity, strategic outliers, and unresolved self review discrepancies.
 
 ## Allowed dispositions
 - **APPROVE:** Accept the AI result with no score change.
