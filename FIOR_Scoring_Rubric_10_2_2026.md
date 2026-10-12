@@ -2,6 +2,8 @@
 
 Version: draft for workflow build. Score anchors other than Annual Contract Value and the tier cutoffs are Team Gamma proposals and may change after TargetOrate confirms them. The weights (35, 25, 30, 10) are fixed.
 
+Iteration 7 draft addition: the Competitive Lock Gate (see "Competitive Lock Gate" below) and the C8 definition of "locked". The 12 and 24 month windows come from TargetOrate; the band boundaries, the handling of unknown status, and the other items in `workflow/Competitive_Lock_Gate_Open_Items.md` are Team Gamma assumptions pending TargetOrate confirmation.
+
 ## Purpose
 
 Score one account on the 14 FIOR criteria using only the evidence in the account record. Each criterion has anchored score levels so repeated runs on the same record produce the same score.
@@ -12,6 +14,7 @@ Score one account on the 14 FIOR criteria using only the evidence in the account
 - The filled ICP Template: target industries, size range, technology (required and preferred), geography, compliance requirements
 - The client's product list and average deal size
 - The client's trigger relevance list, partner target list, and executive title list
+- The Scoring As Of Date for the run (required for the Competitive Lock Gate; state it for every run and do not substitute the current date)
 
 ## Global scoring rules
 
@@ -176,6 +179,12 @@ Evidence: incumbent vendor, satisfaction notes, contract end date.
 | 4 | Competitor contract renews in more than 6 months, or the date is unknown |
 | 2 | Contract locked with a competitor |
 
+Definitions (Iteration 7 clarification; preserves every C8 score in the Iteration 6 key):
+- "Contract locked with a competitor" (score 2) means Incumbent Contract Status is `Locked` and the Contract Renewal Date is 12 or more months after the Scoring As Of Date, or no renewal date is stated.
+- A `Locked` contract renewing in more than 6 and fewer than 12 months scores 4, as "renews in more than 6 months".
+- A date that is unknown with a status other than `Locked` scores 4. A blank incumbent with no other evidence follows the global NS rule.
+- C8 scores the criterion only. The tier effect of a lock is applied by the Competitive Lock Gate below.
+
 ---
 
 ## OPPORTUNITY (30% weight)
@@ -309,6 +318,44 @@ Missing data in totals (proposed): average only the criteria that were scored. I
 
 Tier is a recommendation only. The AI outputs a recommended tier and the consultant approves it.
 
+## Competitive Lock Gate (proposed, Iteration 7)
+
+**Why it exists.** C8 scores a locked competitor contract as one criterion, so a lock can lower a total but cannot stop a strong account from reaching Tier 1. The ICP lists a locked competitor with no actionable exit window as a hard disqualifier, but nothing connected that rule to FIOR. The gate connects them. It changes the recommended tier only. It never changes a criterion score or the total.
+
+**Inputs.** Score implied tier (from the rounded total and the tier table), Incumbent Contract Status, Contract Renewal Date, Incumbent Satisfaction, and the Scoring As Of Date. Window lengths default to 12 and 24 months and may be set in the client ICP.
+
+**Applies when** Incumbent Contract Status is `Locked`.
+- `Not locked` or `No incumbent`: gate not applied.
+- `Unknown` or blank: gate not evaluated. Record "contract status unknown". An unknown status is neither a lock nor a clearance, and it never costs the account points.
+
+**Step 1: band from the renewal date.** Add 12 and 24 calendar months to the Scoring As Of Date. If the target day does not exist in that month, use the last day of the month.
+
+| Band | Condition | Meaning |
+| --- | --- | --- |
+| 1 Open window | Renewal date is earlier than As Of Date plus 12 months (under 12 months) | Score normally, eligible for Tier 1 |
+| 2 Capped | Renewal date is from As Of Date plus 12 months through As Of Date plus 24 months, both inclusive | Cap at Tier 3 |
+| 3 Locked out | Renewal date is later than As Of Date plus 24 months, or no renewal date is stated | Disqualify |
+
+**Step 2: satisfaction move.** Use only the structured Incumbent Satisfaction field. The legacy narrative Competitive Context field may not substitute.
+- `Dissatisfied`: move one band toward Band 1 (3 to 2, 2 to 1; Band 1 stays).
+- `Satisfied`: move one band toward Band 3 (1 to 2, 2 to 3; Band 3 stays).
+- `Neutral`, `Unknown`, or blank: no move. An unknown never costs the account points.
+
+**Step 3: tier effect of the final band.**
+
+| Final band | Effect on the recommended tier |
+| --- | --- |
+| 1 | None. Any tier the score supports, including Tier 1. |
+| 2 | Tier 1 or Tier 2 becomes Tier 3. Tier 3 and Nurture / Disqualify are unchanged. A cap never raises a tier. |
+| 3 | `Disqualified (Competitive Lock)`, whatever the score. |
+
+**Rules.**
+1. Always report both the Score Implied Tier and the Recommended Tier after the gate, the band before and after the satisfaction move, and the fields and values used.
+2. A renewal date on or before the As Of Date is Band 1, and the account goes to consultant review to confirm whether the contract renewed.
+3. The gate uses the Scoring As Of Date, never the run clock. The same record and the same date always give the same result. When the date changes, rerun the gate; a capped account moves into the open window by itself when its renewal falls under 12 months away.
+4. The gate result is a recommendation. A consultant may approve a documented strategic exception. The AI never lifts a cap or reverses a disqualification itself.
+5. Vendor level events at the incumbent (price increases, acquisitions, compliance events and similar) are not part of this gate. They are a possible later addition to C8 and are listed in `workflow/Competitive_Lock_Gate_Open_Items.md`.
+
 ## Per account review triggers
 
 Route a single account to a consultant when any of these is true:
@@ -321,3 +368,4 @@ Route a single account to a consultant when any of these is true:
 - The total falls within 2 points of a tier cutoff (for example 58 to 61)
 - The account scores 2 on both Industry and Company Size
 - A former customer churned unhappy (criterion 14)
+- The Competitive Lock Gate disqualifies the account, or the contract renewal date is on or before the Scoring As Of Date

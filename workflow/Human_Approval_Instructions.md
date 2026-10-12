@@ -20,6 +20,9 @@ The consultant may also challenge any account or criterion, not only flagged one
 - After any input, the AI rescores the affected criteria, reruns the self review checks on them, and recomputes totals, tiers, and review triggers. Accounts whose tier changes across a cutoff are flagged to the reviewer.
 - Final tier assignment is approved by the consultant. The AI never marks an account approved on its own.
 
+## Competitive lock gate results
+A cap at Tier 3 or a disqualification from the Competitive Lock Gate is a recommendation. A disqualification, or a renewal date on or before the Scoring As Of Date, goes to the consultant. The consultant may approve a documented strategic exception, recorded with the original gate result. Caps do not need individual review unless another trigger applies. The AI never lifts a cap or reverses a disqualification on its own.
+
 ## Approval record
 Record reviewer, date, company, criterion/account, AI result, final result, disposition, evidence, rationale, and any follow-up. Overrides must be auditable and must not be made solely to achieve a preferred ABM tier.
 

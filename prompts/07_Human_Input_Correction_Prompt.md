@@ -38,8 +38,8 @@ Checks before applying anything:
 ### Part C: Apply the input and recompute
 1. Change the working copy of the record only, never the original dataset file. Mark each changed field "Human supplied" or "Human corrected" with its source and date.
 2. Rescore only the criteria that use a changed field (use the Data Requirements Matrix to map fields to criteria). For an override, use the reviewer's score.
-3. Run the self review checks (a to h in prompt 06) on every changed criterion.
-4. Recompute the dimension scores, total, rounded total, tier, and review triggers. State which triggers cleared and which new ones appeared. Flag any account whose correction or override moves it across a tier cutoff so the reviewer sees it.
+3. Run the self review checks (a to i in prompt 06) on every changed criterion.
+4. Recompute the dimension scores, total, rounded total, tier, Competitive Lock Gate result, and review triggers. State which triggers cleared and which new ones appeared. Flag any account whose correction or override moves it across a tier cutoff so the reviewer sees it.
 5. Final tier assignment still requires consultant approval. Mark an account approved only when the consultant says so.
 
 ## Return

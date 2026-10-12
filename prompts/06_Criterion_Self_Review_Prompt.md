@@ -21,6 +21,7 @@ Rules:
    - **f. Source hierarchy.** ICP benchmark cited for C1 to C4. Reference lists used only where the ICP does not own the parameter.
    - **g. Forbidden evidence.** Nothing under `/validation/` and no Ground Truth field influenced any score.
    - **h. Math.** Dimension averages use scored criteria only, correct multipliers, correct sum, rounding to the nearest whole number, correct tier cutoff, and every review trigger evaluated (including within 2 points of a cutoff).
+   - **i. Competitive Lock Gate.** Applied only to `Locked` contracts; band computed from the Scoring As Of Date using under 12, 12 to 24 inclusive, and over 24 or no date; satisfaction move taken from the structured field only; cap never raised a tier; both the score implied tier and the post gate tier reported.
 4. Resolve each disagreement between the re derivation and the first pass:
    - If the rubric text and the cited evidence support the re derived score, correct the score, record both scores, and recompute that account's dimension scores, total, tier, and review status.
    - If the rubric text does not settle it (two reasonable readings), do not choose. Keep the first pass score, record both readings, and mark ESCALATE for consultant review.
@@ -29,7 +30,7 @@ Rules:
 7. Do not read or use anything under `/validation/`.
 
 ## Return
-- **Self review log.** One row per mismatch or correction: Company | Criterion | First Pass | Recheck | Check That Failed (a to h) | Resolution (Corrected / ESCALATE) | Final Score | Rubric Citation. For criteria that matched, a single line per account is enough, for example "Acme: C1 to C14 confirmed, checks a to h passed".
+- **Self review log.** One row per mismatch or correction: Company | Criterion | First Pass | Recheck | Check That Failed (a to i) | Resolution (Corrected / ESCALATE) | Final Score | Rubric Citation. For criteria that matched, a single line per account is enough, for example "Acme: C1 to C14 confirmed, checks a to i passed".
 - **Per account result.** Confirmed, Corrected, or Escalated.
 - **Updated portfolio rows** for every corrected account.
 - **Summary counts.** Accounts reviewed, criteria rechecked (should equal 14 times the number of accounts), mismatches found, corrections made, escalations raised, and which checks failed most often.

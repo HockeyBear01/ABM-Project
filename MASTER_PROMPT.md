@@ -24,6 +24,7 @@ If a lower-priority source conflicts with a higher-priority source, use the high
 4. **Client Reference List:** `Client_Target_Reference_Lists.md`.
 5. **Ranking Model:** `data/Criteria_Ranking_Model.csv`.
 6. **FIOR Data Contract:** `data/FIOR_Data_Requirements_Matrix.csv` — defines the account-level evidence fields required to execute C1–C14 consistently.
+7. **Scoring As Of Date:** the date used for the Competitive Lock Gate windows. State it for every run. If it is missing, ask for it; do not substitute the current date.
 
 ## Step 0 — Input Gating and ICP Validation
 
@@ -39,6 +40,7 @@ Before scoring any account:
 - Confirm the ICP contains explicit size/revenue ranges rather than qualitative labels alone.
 - Confirm technology requirements distinguish **required**, **preferred**, and **incompatible** technologies when applicable.
 - Confirm geography/compliance requirements identify served regions and required frameworks.
+- Confirm a Scoring As Of Date was supplied. Confirm the incumbent fields are valid: Incumbent Contract Status (`Locked`, `Not locked`, `No incumbent`, `Unknown`), Incumbent Satisfaction (`Dissatisfied`, `Neutral`, `Satisfied`, `Unknown`), and Contract Renewal Date (a valid date or blank). Incumbent Satisfaction means the target account's satisfaction with the vendor it uses today, not satisfaction with TargetOrate or the client.
 - Treat the included workbook as a **synthetic operational example**. In a real TargetOrate deployment, replace it with the client's completed ICP.
 - If a required ICP benchmark is missing, **do not infer or manufacture it from the account dataset**. Return the affected criterion as `NS`, identify the missing ICP field, and route the account/workflow to consultant review.
 - If the entire ICP is missing, do not produce final FIOR totals or ABM tiers. Return an input-validation failure identifying the missing required input.
@@ -191,12 +193,23 @@ Honor the rubric's incomplete-dimension rules. Do not present a deceptively comp
 
 Apply every review trigger defined in the FIOR rubric, including missing-data tolerance, Low confidence, stale/unverified roles, leadership triggers, inferred values, near-cutoff totals, fit failures, and unhappy churn.
 
+## Step 5A: Competitive Lock Gate
+
+Apply the Competitive Lock Gate in the FIOR rubric to the score implied tier from Step 5. The ICP's locked competitor disqualifier is enforced here.
+
+1. Use the gate only when Incumbent Contract Status is `Locked`. For `Not locked` or `No incumbent`, record "gate not applied". For `Unknown` or blank, record "gate not evaluated (contract status unknown)".
+2. Place the renewal date in a band using the Scoring As Of Date: under 12 months is Band 1 (open window); 12 to 24 months inclusive is Band 2 (cap at Tier 3); over 24 months, or no renewal date, is Band 3 (disqualify). Use the ICP's window lengths if it sets them; otherwise 12 and 24.
+3. Apply the satisfaction move from the structured Incumbent Satisfaction field only: `Dissatisfied` moves one band toward Band 1, `Satisfied` one band toward Band 3, anything else no move.
+4. Apply the tier effect. A cap never raises a tier. Do not change the criterion scores or the total.
+5. Record the Score Implied Tier, Recommended Tier after the gate, band before and after the satisfaction move, and the evidence fields and values used.
+6. A disqualification, or a renewal date on or before the As Of Date, routes the account to consultant review. The gate result is a recommendation and the AI never lifts a cap or reverses a disqualification on its own.
+
 ## Step 6: Self Review of Every Criterion
 
 When Steps 1 to 5 are finished for the whole batch, and before anything goes to the consultant, run `prompts/06_Criterion_Self_Review_Prompt.md`.
 
 - Recheck all 14 criteria for every account. Derive each score again from the evidence and rubric bands first, then compare it with the first pass.
-- Check evidence cited, band selection, NS versus absence handling, precedence rules, caps and flags, source hierarchy, forbidden evidence, and the roll up math.
+- Check evidence cited, band selection, NS versus absence handling, precedence rules, caps and flags, source hierarchy, forbidden evidence, the roll up math, and the Competitive Lock Gate (band, satisfaction move, and tier effect).
 - Correct a score only when the rubric text and cited evidence support the correction. Record both scores and recompute that account's dimensions, total, tier, and review status.
 - If the rubric does not settle a disagreement, keep the first pass score, record both readings, and escalate to the consultant.
 - Run once, plus one recheck of any corrected criteria. Do not loop further.
@@ -218,7 +231,9 @@ After Step 6, stop and run `prompts/07_Human_Input_Correction_Prompt.md`.
 
 Return a ranked Markdown portfolio table containing:
 
-**Rank | Company Name | Fit Score | Intent Score | Opportunity Score | Relationship Score | Total Score | Recommended ABM Tier | Data Gaps Flagged | Review Status | Self Review Result**
+**Rank | Company Name | Fit Score | Intent Score | Opportunity Score | Relationship Score | Total Score | Score Implied Tier | Competitive Gate Action | Recommended ABM Tier | Data Gaps Flagged | Review Status | Self Review Result**
+
+`Recommended ABM Tier` is the tier after the Competitive Lock Gate. Rank accounts by total score and show disqualified accounts at the end.
 
 Then provide a concise portfolio summary covering:
 

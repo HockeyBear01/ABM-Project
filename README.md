@@ -35,7 +35,7 @@ A new TargetOrate consultant should execute the toolkit in this order:
 | Input templates | `templates/Client_ICP_Input_Template.md`; `templates/Account_Data_Input_Template.csv`; `templates/Human_Review_Input_Template.csv` |
 | Exception-handling prompts | `prompts/04_Exception_Handling_Prompt.md` |
 | Output templates | `templates/ABM_Portfolio_Output_Template.csv`; `templates/Account_Summary_Card_Template.md` |
-| Test scenarios & expected results | `data/20_Company_Dataset_Week6_Validation.csv`; `validation/Expected_FIOR_Results_VALIDATION_ONLY.csv` |
+| Test scenarios & expected results | `data/20_Company_Dataset_Week6_Validation.csv`; `validation/Expected_FIOR_Results_VALIDATION_ONLY.csv`; Iteration 7 gate tests: `data/20_Company_Dataset_Iteration7.csv`, `validation/Expected_FIOR_Results_ITERATION7_GATE_DRAFT.csv`, `validation/Competitive_Lock_Gate_Test_Scenarios.md` |
 | Validation prompts | `prompts/05_Validation_Adjudication_Prompt.md`; `validation/Adjudication_Log.md` |
 
 ## Authoritative Scoring Artifacts
@@ -69,6 +69,7 @@ The synthetic 20-company validation set uses versioned validation keys so histor
 - `validation/Expected_FIOR_Results_ADJUDICATED_WORKING.csv` preserves the post-adjudication working key for future regression testing.
 - `validation/Expected_FIOR_Results_VALIDATION_ONLY.csv` is retained for backward compatibility and currently mirrors the adjudicated working key.
 - `validation/Adjudication_Log.md` documents why the historical and working keys differ.
+- `validation/Expected_FIOR_Results_ITERATION7_GATE_DRAFT.csv` and `validation/Competitive_Lock_Gate_Test_Scenarios.md` test the Competitive Lock Gate. They were written by Team Gamma, not by TargetOrate, so they check that the gate follows its rules and are not an independent accuracy measure. They pair with `data/20_Company_Dataset_Iteration7.csv`, which adds the Incumbent Contract Status column and replaces the old `Locked` value in Incumbent Satisfaction with `Unknown`. The Week 6 dataset is kept unchanged for the Iteration 6 keys.
 
 Do not compare a new run to one key while reporting metrics from the other.
 
@@ -91,8 +92,9 @@ The included ICP, company dataset, expected results, and adjudication log are sy
 2. replace the synthetic account dataset with current client/account data;
 3. keep dated evidence current;
 4. preserve consultant approval for flagged cases;
-5. keep validation assets quarantined; and
-6. change scoring methodology only through a separately tested and documented iteration.
+5. keep validation assets quarantined;
+6. change scoring methodology only through a separately tested and documented iteration; and
+7. populate Incumbent Satisfaction (the target account's satisfaction with its current vendor) from TargetOrate's intent data and sales conversations, and state a Scoring As Of Date for every run. The Competitive Lock Gate open items for TargetOrate are in `workflow/Competitive_Lock_Gate_Open_Items.md`.
 
 ## MVP Acceptance Test
 
