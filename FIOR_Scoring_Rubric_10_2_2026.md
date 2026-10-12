@@ -326,7 +326,7 @@ This one rule replaces three earlier rules that disagreed: the global missing da
 **Rule for missing data (NS).**
 1. Cannot score at all (fatal). If Company Name, Industry or Sub-Industry (C1), or Target ACV (C9) is missing, the account is held and a data request goes to the consultant. These are the Criteria Ranking Model ranks 1 to 3. Without them the tier cannot be defended and no bound can be computed.
 2. Any other NS: compute the total twice, once with every NS criterion set to 2 (low bound) and once set to 10 (high bound), using the same dimension formula and rounding. If both totals give the same tier, the missing data cannot change the recommendation. The account is not reviewed for the NS; the output carries an audit note listing the missing fields. If the two totals give different tiers, the account goes to the consultant, with the specific fields that would settle it listed.
-3. Evidence rank only orders the queue (see rule 5 below). It never decides, by itself, whether an account is reviewed.
+3. Evidence rank only orders the queue (see the ceiling paragraph below). It never decides, by itself, whether an account is reviewed.
 
 **Why this rule.** A consultant's time is worth spending only where the missing value could change what the client does. A tier that stays the same at the worst case and the best case needs no human to fill the gap. A tier that changes needs one. This ties review to the decision rather than to the number of blanks.
 
@@ -335,8 +335,11 @@ This one rule replaces three earlier rules that disagreed: the global missing da
 **The test behind every trigger.** A step goes to a human only when at least one of these is true: (a) the value is a judgment the rubric cannot settle (conflicting industry classification, a strategic outlier, rubric ambiguity); (b) the evidence cannot be checked from the record (an inferred timeline, ACV or competitor status, a role not verified in 6 months, low confidence); (c) the recommendation could flip on a small change (a total within 2 points of a cutoff, or a missing value whose bounds straddle a tier); or (d) the cost of being wrong is high and hard to reverse (a Tier 1 spend, an unhappy former customer, a contract that may have renewed). Anything that fails all four tests is handled by the workflow and logged, not reviewed. This is the reasoning TargetOrate asked for; the individual triggers follow from it, and a new trigger should be added only if it passes one of the four tests.
 
 **Review volume ceiling (proposed).** Plan for no more than 25 percent of accounts in a run going to a consultant (for example 25 of 100). Reasoning: at roughly 15 minutes per account, 25 reviews is about 6 hours, which one consultant can complete in a working day, so a run can be turned around within a day; above that, review becomes the bottleneck and approvals become rushed. The figure is a Team Gamma proposal and needs TargetOrate's real consultant capacity.
-4. If more than 25 percent trigger, review in this order: fatal data holds first, then accounts whose bounds straddle Tier 1, then accounts near a cutoff, then the rest. Accounts not reached are released as provisional, never as approved.
-5. Report the review rate for every run. A rate above the ceiling is a finding about the data or the rules and should be reported, not hidden.
+
+- If more than 25 percent trigger, review in this order: fatal data holds first, then accounts whose bounds straddle Tier 1, then accounts near a cutoff, then the rest. Accounts not reached are released as provisional, never as approved.
+- Report the review rate for every run. A rate above the ceiling is a finding about the data or the rules and should be reported, not hidden.
+
+**Sampled check (proposed).** A consultant spot checks 10 percent of `Acceptable` accounts, at least 3, chosen by the consultant, before release. Any error found in the sample means the whole `Acceptable` group is reviewed. The 10 percent figure is a Team Gamma proposal for TargetOrate to confirm.
 
 ## Competitive Lock Gate (proposed, Iteration 7)
 

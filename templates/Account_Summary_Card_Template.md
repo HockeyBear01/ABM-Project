@@ -5,7 +5,8 @@
 **Competitive Lock Gate:** (Not applied / Not evaluated / Open window / Capped at Tier 3 / Disqualified; band, renewal date, satisfaction evidence)  
 **Recommended ABM Tier (after gate):**  
 **Composite Score:** /100  
-**Review Status:**  
+**Review Status:** (Acceptable / Review / Held)
+**Review Reason:** (every trigger that fired; for missing data, the low and high bound tiers)  
 **Self Review Result:** (Confirmed / Corrected / Escalated)  
 **Human Approval Status:**  
 

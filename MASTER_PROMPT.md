@@ -78,7 +78,7 @@ Use the ranking model to order the review queue, not to decide whether an accoun
 
 - **Fatal (ranks 1 to 3: Company Name, Industry and Sub-Industry, Target ACV):** hold the account and request the data. Do not guess.
 - **Any other NS:** compute the total with every NS criterion at 2 and again at 10. If the tier is the same, do not send to review; add an audit note naming the missing fields. If the tier differs, send to the consultant and name the fields that would settle it.
-- **Volume:** report the share of accounts sent to review. The proposed ceiling is 25 percent. If exceeded, review in the order set in the rubric and release the rest as provisional.
+- **Volume:** report the share of accounts sent to review. The proposed ceiling is 25 percent, with a 10 percent sampled check of `Acceptable` accounts (at least 3). If exceeded, review in the order set in the rubric and release the rest as provisional.
 
 Apply rubric confidence levels (High / Medium / Low) and all mandatory review triggers.
 
