@@ -17,7 +17,7 @@ Use before releasing a scored ABM portfolio.
 - [ ] 10 percent of `Acceptable` accounts (at least 3) were spot checked by a consultant, and any error widened the check to the whole group.
 - [ ] The scoring file contained no Ground Truth column (see `tools/split_ground_truth.py`).
 - [ ] Stale evidence thresholds were applied.
-- [ ] Dimension weights and total rounding were calculated correctly.
+- [ ] Dimension weights and total rounding were calculated correctly (exact .5 rounds up).
 - [ ] Tier cutoffs were applied to the rounded total.
 - [ ] Self review covered all 14 criteria for every account (criteria rechecked equals 14 times accounts).
 - [ ] Every self review mismatch was corrected with a rubric citation or escalated; no score was changed to reach a tier.
