@@ -233,7 +233,7 @@ Return a ranked Markdown portfolio table containing:
 
 **Rank | Company Name | Fit Score | Intent Score | Opportunity Score | Relationship Score | Total Score | Score Implied Tier | Competitive Gate Action | Recommended ABM Tier | Data Gaps Flagged | Review Status | Review Reason | Low Bound / High Bound Tier | Self Review Result**
 
-`Review Status` has three values: `Acceptable` (no review trigger fired; the recommendation can be released subject to the sampled check), `Review` (at least one trigger fired; consultant approval needed), and `Held` (a fatal field is missing; no tier). `Review Reason` names every trigger that fired. `Low Bound / High Bound Tier` is filled only when the account has an NS, and reads for example `T2 / T1`. `Recommended ABM Tier` is the tier after the Competitive Lock Gate. Rank accounts by total score and show disqualified accounts at the end.
+`Review Status` has three values: `Acceptable` (no review trigger fired; no individual review, but the consultant still approves its tier when signing off the portfolio after the sampled check), `Review` (at least one trigger fired; consultant approval needed), and `Held` (a fatal field is missing; no tier). `Review Reason` names every trigger that fired. `Low Bound / High Bound Tier` is filled only when the account has an NS, and reads for example `T2 / T1`. `Recommended ABM Tier` is the tier after the Competitive Lock Gate. Rank accounts by total score and show disqualified accounts at the end.
 
 Then provide a concise portfolio summary covering:
 
