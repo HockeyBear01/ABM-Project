@@ -14,7 +14,7 @@ Use before releasing a scored ABM portfolio.
 - [ ] Every NS was tested with the low (2) and high (10) bounds; review was triggered only where the tier differs, and fatal fields (Company Name, Industry, Target ACV) were held.
 - [ ] The share of accounts sent to review was reported against the 25 percent ceiling, and accounts not reached are labeled provisional.
 - [ ] Totals ending exactly in .5 were rounded up.
-- [ ] A sample of `Acceptable` accounts was spot checked by a consultant.
+- [ ] 10 percent of `Acceptable` accounts (at least 3) were spot checked by a consultant, and any error widened the check to the whole group.
 - [ ] The scoring file contained no Ground Truth column (see `tools/split_ground_truth.py`).
 - [ ] Stale evidence thresholds were applied.
 - [ ] Dimension weights and total rounding were calculated correctly.
