@@ -51,7 +51,7 @@ Rules:
 2. **Explicit-exclusion rule:** If the ICP explicitly identifies the account's industry, sub-industry, use case, or business category as outside the ICP, score C1 = 2. An otherwise matching parent industry does not override an explicit exclusion.
 3. **Specific-over-general rule:** When a specific sub-industry/use-case classification conflicts with a broader industry classification, the more specific classification governs when the ICP explicitly addresses it.
 4. Do not infer an industry or sub-industry from unrelated fields solely to improve the score.
-5. If the industry/sub-industry evidence itself is missing or genuinely contradictory, apply the global NS/review rules rather than assuming a fit.
+5. If the industry/sub-industry evidence itself is missing or genuinely contradictory, return NS for C1 and apply the Review rule (Industry and Sub-Industry are fatal fields, so the account is held) rather than assuming a fit.
 
 Flag trigger: if account evidence contains materially conflicting industry classifications that cannot be resolved using the ICP hierarchy above, score using the best fully supported classification and route the account to consultant review.
 

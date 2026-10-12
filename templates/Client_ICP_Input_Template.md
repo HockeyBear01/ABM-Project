@@ -52,4 +52,4 @@
 - Hard disqualifiers:
 - Human-review conditions:
 
-Complete all applicable fields before production scoring. Missing required ICP benchmarks produce NS/review rather than inferred values.
+Complete all applicable fields before production scoring. Missing required ICP benchmarks produce NS, handled by the rubric's Review rule, rather than inferred values.
