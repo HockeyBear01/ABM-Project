@@ -17,6 +17,9 @@ Use before releasing a scored ABM portfolio.
 - [ ] Tier cutoffs were applied to the rounded total.
 - [ ] Self review covered all 14 criteria for every account (criteria rechecked equals 14 times accounts).
 - [ ] Every self review mismatch was corrected with a rubric citation or escalated; no score was changed to reach a tier.
+- [ ] A Scoring As Of Date was stated and used for every gate calculation.
+- [ ] The Competitive Lock Gate was applied only to `Locked` contracts, with the correct band, satisfaction move, and tier effect, and no cap raised a tier.
+- [ ] Both the score implied tier and the post gate tier are reported, and gate disqualifications were routed to the consultant.
 - [ ] All mandatory review triggers were surfaced.
 - [ ] Human overrides include evidence and rationale.
 - [ ] Human supplied or corrected data carries a source and date and is marked in the audit trail.

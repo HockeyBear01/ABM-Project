@@ -37,6 +37,7 @@
 ## Buying context
 - Favorable buying situations:
 - Competitive risks/disqualifiers:
+- Competitive lock windows in months (defaults: open window under 12; cap at Tier 3 from 12 through 24 inclusive; disqualify beyond 24 or locked with no stated renewal date):
 - Relevant trigger types:
 
 ## Stakeholders and relationship

@@ -1,7 +1,9 @@
 # Account Summary Card
 
 **Company:**  
-**Recommended ABM Tier:**  
+**Score Implied Tier:**  
+**Competitive Lock Gate:** (Not applied / Not evaluated / Open window / Capped at Tier 3 / Disqualified; band, renewal date, satisfaction evidence)  
+**Recommended ABM Tier (after gate):**  
 **Composite Score:** /100  
 **Review Status:**  
 **Self Review Result:** (Confirmed / Corrected / Escalated)  
