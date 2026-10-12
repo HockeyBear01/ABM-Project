@@ -13,6 +13,7 @@ Exception classes:
 - STALE EVIDENCE: score only as the rubric permits and flag when thresholds are exceeded.
 - STRATEGIC OUTLIER: score normally, then route for consultant review; do not manipulate the score.
 - RUBRIC AMBIGUITY: do not invent a new anchor. Record competing interpretations and escalate methodology.
+- SELF REVIEW DISCREPANCY: first pass and recheck disagree and the rubric text does not settle it -> keep the first pass score, record both readings, escalate to the consultant.
 - DATA/SCHEMA ERROR: malformed or unavailable required input -> stop or route according to severity.
 - VALIDATION CONFLICT: never change production scoring merely to match an answer key; send to adjudication.
 

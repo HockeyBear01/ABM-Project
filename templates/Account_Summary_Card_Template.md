@@ -4,6 +4,7 @@
 **Recommended ABM Tier:**  
 **Composite Score:** /100  
 **Review Status:**  
+**Self Review Result:** (Confirmed / Corrected / Escalated)  
 **Human Approval Status:**  
 
 ## Dimension scores
@@ -31,4 +32,6 @@ For C1-C14 record: Score/NS | Rubric band | Evidence | Benchmark | Confidence | 
 - Disposition:
 - Reviewer/date:
 - Override, if any:
+- Human supplied or corrected data (field, value, source, date):
+- Original AI result kept:
 - Rationale/evidence:

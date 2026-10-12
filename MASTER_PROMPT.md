@@ -191,17 +191,42 @@ Honor the rubric's incomplete-dimension rules. Do not present a deceptively comp
 
 Apply every review trigger defined in the FIOR rubric, including missing-data tolerance, Low confidence, stale/unverified roles, leadership triggers, inferred values, near-cutoff totals, fit failures, and unhappy churn.
 
-## Step 6 — Output
+## Step 6: Self Review of Every Criterion
+
+When Steps 1 to 5 are finished for the whole batch, and before anything goes to the consultant, run `prompts/06_Criterion_Self_Review_Prompt.md`.
+
+- Recheck all 14 criteria for every account. Derive each score again from the evidence and rubric bands first, then compare it with the first pass.
+- Check evidence cited, band selection, NS versus absence handling, precedence rules, caps and flags, source hierarchy, forbidden evidence, and the roll up math.
+- Correct a score only when the rubric text and cited evidence support the correction. Record both scores and recompute that account's dimensions, total, tier, and review status.
+- If the rubric does not settle a disagreement, keep the first pass score, record both readings, and escalate to the consultant.
+- Run once, plus one recheck of any corrected criteria. Do not loop further.
+
+Self review adds routing only. It never changes a rubric band, weight, tier cutoff, or ICP benchmark, and an unresolved self review discrepancy is a workflow level review trigger in addition to the rubric's triggers.
+
+## Step 7: Human Input and Correction Checkpoint
+
+After Step 6, stop and run `prompts/07_Human_Input_Correction_Prompt.md`.
+
+- Present the review packet: portfolio table, review queue, self review escalations, and an invitation to challenge any account or criterion.
+- Wait for the consultant. Do not finalize outputs or mark any account approved until the consultant responds or releases the results as provisional.
+- Accept approvals, data corrections, data supplied, score overrides, context notes, and escalations, using `templates/Human_Review_Input_Template.csv` or plain language.
+- Data inputs need a source and date. Overrides need the governing rubric band and evidence. Requests to change rubric bands, weights, cutoffs, or ICP benchmarks are escalated, not applied.
+- Apply input to the working copy only, rescore the affected criteria, rerun the self review checks on them, and recompute dimensions, total, tier, and review triggers. Keep the original AI result beside every change.
+- In a blind validation run, accept no human input. Return the packet and label every result provisional.
+
+## Step 8: Output
 
 Return a ranked Markdown portfolio table containing:
 
-**Rank | Company Name | Fit Score | Intent Score | Opportunity Score | Relationship Score | Total Score | Recommended ABM Tier | Data Gaps Flagged | Review Status**
+**Rank | Company Name | Fit Score | Intent Score | Opportunity Score | Relationship Score | Total Score | Recommended ABM Tier | Data Gaps Flagged | Review Status | Self Review Result**
 
 Then provide a concise portfolio summary covering:
 
 - Tier distribution;
 - Highest-priority accounts;
 - Accounts requiring consultant review;
+- Self review corrections and escalations;
+- Human input applied, and accounts still provisional;
 - Material input/data-quality limitations; and
 - Any source conflicts detected.
 
